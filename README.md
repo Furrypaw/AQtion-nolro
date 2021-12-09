@@ -1,3 +1,16 @@
+Fork of Aquantia's AQtion linux driver with LRO disabled and patched to work on Proxmox hosts
+===========
+This fork is specifically intended for our institute's Proxmox cluster, but may be of use for others as well.
+
+Why?
+-----------
+As can be read in the original README.txt for this driver, Large Receive Offload (LRO) is enabled by default, but does
+not play nice with IP forwarding, routing, or bridging, which is exactly what we need our cluster's exit nodes to do.
+Indeed, the version of atlantic built into the kernel, which also has LRO enabled, has caused those nodes to lose
+connection and crash frequently.  Compiling the driver and disabling the feature fixed this for us.  Also, the install
+scripts provided with the driver do not support Proxmox out of the box.  This fork fixes both of these issues for our
+installation, and may do so for yours, too.
+
 AQUANTIA AQtion (atlantic) linux driver
 ===========
 This is a latest development preview of aquantia's atlantic linux kernel driver for AQtion family of multigigabit adapters.

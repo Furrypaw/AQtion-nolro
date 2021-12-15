@@ -39,7 +39,7 @@
 #define AQ_CFG_RX_HDR_SIZE 256U
 
 /* LRO */
-#define AQ_CFG_IS_LRO_DEF           1U
+#define AQ_CFG_IS_LRO_DEF           0U
 
 /* PTP */
 #define AQ_CFG_PTP_DEF              1U

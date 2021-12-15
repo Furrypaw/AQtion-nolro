@@ -83,6 +83,8 @@ get_distro_os ()
 	if [ "${OS}" = "Linux" ] ; then
 		if [ -f /etc/redhat-release ] ; then
 			DISTRO_NAME='redhat'
+		elif [ -d /etc/pve ] ; then
+			DISTRO_NAME='proxmox'
 		elif [ -f /etc/debian_version ] ; then
 			DISTRO_NAME='debian'
 		elif [ -f /etc/SuSE-release ] ; then
@@ -108,6 +110,11 @@ main ()
 	if [ "${DISTRO}" = "debian" ] ; then
 		PACKET_MNG="${APT_GET}"
 		LINUX_HEADERS="linux-headers-`uname -r`"
+		TOOLS="build-essential"
+		CMD="dpkg-query -l"
+	elif [ "${DISTRO}" = "proxmox" ] ; then
+		PACKET_MNG="${APT_GET}"
+		LINUX_HEADERS="pve-headers-`uname -r`"
 		TOOLS="build-essential"
 		CMD="dpkg-query -l"
 	elif [ "${DISTRO}" = "redhat" ] ; then

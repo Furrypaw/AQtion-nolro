@@ -11,6 +11,23 @@ connection and crash frequently.  Compiling the driver and disabling the feature
 scripts provided with the driver do not support Proxmox out of the box.  This fork fixes both of these issues for our
 installation, and may do so for yours, too.
 
+How?
+-----------
+We have modified the install scripts to work on Proxmox VE host systems and turned off LRO permanently in 'aq_cfg.h'.
+Functionally, everything (installing and using) should remain the same as documented in the original distribution.
+
+What else?
+-----------
+If you use dkms to auto-install the driver, you will find that it fails because of dkms's version check. (The in-tree
+atlantic driver follows the kernel's versioning, while this one has its own, resulting in it looking older to dkms.)
+To fix this, you can force disable the version checking by creating the file
+'/usr/share/dkms/modules_to_force_install/atlantic' (create the directory as well if necessary) with content
+<code>
+atlantic
+</code>
+
+Below you can find the original unmodified readme.
+
 AQUANTIA AQtion (atlantic) linux driver
 ===========
 This is a latest development preview of aquantia's atlantic linux kernel driver for AQtion family of multigigabit adapters.

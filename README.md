@@ -6,10 +6,10 @@ Why?
 -----------
 As can be read in the original README.txt for this driver, Large Receive Offload (LRO) is enabled by default, but does
 not play nice with IP forwarding, routing, or bridging, which is exactly what we need our cluster's exit nodes to do.
-Indeed, the version of atlantic built into the kernel, which also has LRO enabled, has caused those nodes to lose
-connection and crash frequently.  Compiling the driver and disabling the feature fixed this for us.  Also, the install
-scripts provided with the driver do not support Proxmox out of the box.  This fork fixes both of these issues for our
-installation, and may do so for yours, too.
+Indeed, the version of atlantic built into the linux kernel, which also has LRO enabled, has caused those nodes to lose
+connection and crash frequently.  We decided we want to fix this in the most general way by changing the driver
+defaults.  Also, the install scripts provided with the driver do not support Proxmox out of the box.  This fork fixes
+both of these issues for our installation, and may do so for yours, too.
 
 How?
 -----------
@@ -21,10 +21,8 @@ What else?
 If you use dkms to auto-install the driver, you will find that it fails because of dkms's version check. (The in-tree
 atlantic driver follows the kernel's versioning, while this one has its own, resulting in it looking older to dkms.)
 To fix this, you can force disable the version checking by creating the file
-'/usr/share/dkms/modules_to_force_install/atlantic' (create the directory as well if necessary) with content
-<code>
-atlantic
-</code>
+'/usr/share/dkms/modules_to_force_install/atlantic' (create the parent directory as well if necessary) with content
+<code>atlantic</code>
 
 Below you can find the original unmodified readme.
 
